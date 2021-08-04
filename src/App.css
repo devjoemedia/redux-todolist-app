@@ -1,0 +1,77 @@
+.app {
+  width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 9px 15px rgba(0,0,0,0.5);
+}
+
+.app__title {
+  text-transform: uppercase;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.app__form {
+  display: flex;
+}
+
+.app__form .input {
+  flex: 1; 
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  background: #f1f1f1;
+}
+
+
+.app__form .add {
+  border: none;
+  outline: none;
+  font-weight: bold;
+  color: #fff;
+  padding: 10px;
+  background: #F50057;
+  cursor: pointer;
+}
+
+.app__todos {
+  margin-top: 20px;
+}
+.app__todos ul {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.app__todo {
+  padding: 15px;
+  margin-bottom: 5px;
+  background: #f1f1f1;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+@media screen and (max-width: 425px) {
+  .app {
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+  }
+  .app__todos ul {
+    min-height: 65vh;
+  }
+}
+
+.remove {
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #F50057;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
