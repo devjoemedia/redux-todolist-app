@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import './Checkbox.css'
 import store from './redux-store/store';
-import {addTodo, removeTodo} from './redux-store/actions';
+import {addTodo, loadTodos, removeTodo, toggleCompleteState} from './redux-store/actions';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 function App() {
@@ -15,10 +15,15 @@ function App() {
   });
   
   useEffect(()=>{
-    let data = store.getState();
-    setTodos(data.todos);
+    // let data = store.getState();
+    // setTodos(data.todos);
+    store.dispatch(loadTodos())
   },[])
 
+  const toggleComplete =(id)=> {
+    store.dispatch(toggleCompleteState(id));
+    console.log(store.getState());
+  }
   const handleRemove = (id) =>{
     store.dispatch(removeTodo(id))
   }
@@ -80,11 +85,17 @@ function App() {
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          className={"app__todo"}
+                          className="app__todo"
                         >
                           <p>
-                            <input type="checkbox" id={`item-${todo.id}`} />
-                            <label for={`item-${todo.id}`}>{todo.text}</label>
+                            <label
+                              className={`${
+                                todo.completed ? "completed" : " "
+                              }`}
+                              onClick={() => toggleComplete(todo.id)}
+                            >
+                              {todo.title}
+                            </label>
                           </p>
 
                           <button
@@ -98,7 +109,7 @@ function App() {
                     </Draggable>
                   ))
                 ) : (
-                  <h1>"No item found!"</h1>
+                  <h1>No item found!</h1>
                 )}
                 {provided.placeholder}
               </ul>
